@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Expense Tracker</h1>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
+                <li><a href="{{ url_for('plot_expenses') }}">View Expense Plot</a></li>
+                <li><a href="{{ url_for('generate_report') }}">Generate Report</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Expenses</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+            </tr>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense['Date'] }}</td>
+                <td>{{ expense['Amount'] }}</td>
+                <td>{{ expense['Category'] }}</td>
+                <td>{{ expense['Description'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

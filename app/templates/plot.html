@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Plot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Expense Tracker</h1>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
+                <li><a href="{{ url_for('plot_expenses') }}">View Expense Plot</a></li>
+                <li><a href="{{ url_for('generate_report') }}">Generate Report</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Expenses by Category</h2>
+        <h3>Bar Chart</h3>
+        <img src="data:image/png;base64,{{ bar_plot_url }}" alt="Expense Plot">
+        <h3>Pie Chart</h3>
+        <img src="data:image/png;base64,{{ pie_plot_url }}" alt="Expense Pie Chart">
+        <br>
+        <h3>Histogram</h3>
+        <img src="data:image/png;base64,{{ hist_plot_url }}" alt="Histogram of Expenses">
+        <br>
+        <a href="{{ url_for('index') }}">Back to Expenses</a>
+    </div>
+</body>
+</html>

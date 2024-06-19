@@ -9,10 +9,15 @@
         <div class="container">
             <h1>Expense Tracker</h1>
             <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
-                <li><a href="{{ url_for('plot_expenses') }}">View Expense Plot</a></li>
-                <li><a href="{{ url_for('generate_report') }}">Generate Report</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
+                    <li><a href="{{ url_for('plot_expenses') }}">View Expense Plot</a></li>
+                    <li><a href="{{ url_for('generate_report') }}">Generate Report</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </header>
@@ -34,6 +39,9 @@
             </tr>
             {% endfor %}
         </table>
+        {% if not current_user.is_authenticated %}
+            <p>Please <a href="{{ url_for('login') }}">log in</a> to view and manage your expenses.</p>
+        {% endif %}
     </div>
 </body>
 </html>

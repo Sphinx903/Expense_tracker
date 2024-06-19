@@ -36,13 +36,12 @@ header li {
     padding: 0 20px 0 20px;
 }
 
-h2 {
-    color: #35424a;
-}
-
 h1 {
     margin-left: 20px;
+}
 
+h2 {
+    color: #35424a;
 }
 
 form {
@@ -98,4 +97,14 @@ th, td {
 
 th {
     background-color: #f2f2f2;
+}
+
+/* Additional styling for user authentication messages */
+.auth-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ffe4b2; /* Light orange background */
+    border: 1px solid #ffa500; /* Orange border */
+    border-radius: 5px;
+    color: #8b0000; /* Dark red text color */
 }

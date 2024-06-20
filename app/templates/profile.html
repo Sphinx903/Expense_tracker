@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Expense Tracker</title>
+    <title>User Profile</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -14,16 +14,16 @@
                 <li><a href="{{ url_for('plot_expenses') }}">View Expense Plot</a></li>
                 <li><a href="{{ url_for('generate_report') }}">Generate Report</a></li>
                 {% if current_user.is_authenticated %}
-                <p class="profile-dropdown">
-                    <a href="{{ url_for('profile') }}" class="profile-icon">
+                <li class="profile-dropdown">
+                    <a href="#" class="profile-icon">
                         <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Icon">
                         Profile
                     </a>
-                    <!-- <ul class="dropdown-content">
+                    <ul class="dropdown-content">
                         <li><a href="{{ url_for('profile') }}">View Profile</a></li>
                         <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    </ul> -->
-                </p>
+                    </ul>
+                </li>
                 {% else %}
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 {% endif %}
@@ -31,23 +31,8 @@
         </div>
     </header>
     <div class="container">
-        <h2>Expenses</h2>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Description</th>
-            </tr>
-            {% for expense in expenses %}
-            <tr>
-                <td>{{ expense['Date'] }}</td>
-                <td>{{ expense['Amount'] }}</td>
-                <td>{{ expense['Category'] }}</td>
-                <td>{{ expense['Description'] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+        <h2>Welcome, {{ current_user.id }}</h2>
+        <p>This is the user profile page.</p>
     </div>
 </body>
 </html>

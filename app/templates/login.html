@@ -2,22 +2,23 @@
 <html>
 <head>
     <title>Login - Expense Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Login to Expense Tracker</h1>
-    </header>
-    <main>
-        <form action="{{ url_for('login') }}" method="POST">
-            {% if error %}
-                <p>{{ error }}</p>
-            {% endif %}
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+    <div class="container">
+        <h2>Login - Expense Tracker</h2>
+        {% if error %}
+        <div class="auth-message">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
             <input type="submit" value="Login">
         </form>
-    </main>
+    </div>
 </body>
 </html>

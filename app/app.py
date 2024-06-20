@@ -3,7 +3,7 @@ import os
 # Set Matplotlib cache directory before importing matplotlib
 os.environ['MPLCONFIGDIR'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mpl_cache')
 
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ import base64
 import openpyxl
 
 app = Flask(__name__)
-app.secret_key = app.secret_key = b'%\x14\xd8\x91\xb1\x13G\x19\x80y\xffVK\xaaNl\xfd\xf7,\x8ei\xa6w\x84' # Replace with your secret key
+app.secret_key = b'%\x14\xd8\x91\xb1\x13G\x19\x80y\xffVK\xaaNl\xfd\xf7,\x8ei\xa6w\x84'
 
 # Initialize the DataFrame to store expenses
 categories = ['Salaries', 'Utilities', 'Maintenance', 'Supplies', 'Transportation', 'Miscellaneous']
@@ -21,6 +21,7 @@ expenses = pd.DataFrame(columns=['Date', 'Amount', 'Category', 'Description'])
 # Flask-Login initialization
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 # Example user database (replace with your actual user model and database)
 users = {
@@ -41,11 +42,18 @@ def load_user(user_id):
     return None
 
 @app.route('/')
+def home():
+    return redirect(url_for('login'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', user=current_user)
+
+@app.route('/index')
+@login_required
 def index():
-    if current_user.is_authenticated:
-        return render_template('index.html', expenses=expenses.to_dict('records'))
-    else:
-        return redirect(url_for('login'))
+    return render_template('index.html', expenses=expenses.to_dict('records'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
